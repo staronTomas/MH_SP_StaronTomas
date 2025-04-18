@@ -73,11 +73,11 @@ public class GeneticAlgorithm
                     double mutationType = Random.NextDouble();
                     if (mutationType < Parameters.SwapMutationProbability)
                     {
-                        Mutation.SwapMutation(child);
+                        MutationTSP.SwapMutation(child);
                     }
                     else
                     {
-                        Mutation.InversionMutation(child);
+                        MutationTSP.InversionMutation(child);
                     }
                 }
                 
