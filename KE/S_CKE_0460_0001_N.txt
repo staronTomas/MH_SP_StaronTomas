@@ -1,0 +1,461 @@
+460
+Bohúňovo 
+Čoltovo 
+Gemerská Panica 
+Stratená 
+Dedinky 
+Mlynky 
+Plešivec 
+Dobšiná 
+Vyšná Slaná 
+Rejdová 
+Vlachovo 
+Gočovo 
+Nižná Slaná 
+Kobeliarovo 
+Brdárka 
+Hanková 
+Markuška 
+Slavoška 
+Koceľovce 
+Roštár 
+Petrovo 
+Ochtiná 
+Rochovce 
+Slavošovce 
+Čierna Lehota 
+Štítnik 
+Rozložná 
+Gočaltovo 
+Kunova Teplica 
+Pašková 
+Honce 
+Henckovce 
+Betlanovce 
+Hrabušice 
+Letanovce 
+Spišské Tomášovce 
+Smižany 
+Spišská Nová Ves 
+Harichovce 
+Odorín 
+Markušovce 
+Danišovce 
+Lieskovany 
+Teplička 
+Matejovce 
+Chrasť nad Hornádom 
+Rudňany 
+Poráč 
+Jamník 
+Vítkovce 
+Spišský Hrušov 
+Hincovce 
+Bystrany 
+Olcnava 
+Spišské Vlachy 
+Žehra 
+Oľšavka 
+Slatvina 
+Vojkovce 
+Richnava 
+Hrišovce 
+Kluknava 
+Krompachy 
+Kaľava 
+Slovinky 
+Žakarovce 
+Jaklovce 
+Gelnica 
+Prakovce 
+Helcmanovce 
+Mníšek nad Hnilcom 
+Švedlár 
+Stará Voda 
+Nálepkovo 
+Hnilčík 
+Závadka 
+Hnilec 
+Henclová 
+Gemerská Poloma 
+Smolník 
+Smolnícka Huta 
+Úhorná 
+Betliar 
+Krásnohorské Podhradie 
+Rožňava 
+Čučma 
+Pača 
+Jovice 
+Krásnohorská Dlhá Lúka 
+Drnava 
+Kováčová 
+Lúčka 
+Bôrka 
+Jablonov nad Turňou 
+Hrušov 
+Silická Jablonica 
+Silica 
+Slavec 
+Brzotín 
+Kružná 
+Rudná 
+Rakovnica 
+Rožňavské Bystré 
+Silická Brezová 
+Turňa nad Bodvou 
+Dvorníky - Včeláre 
+Zádiel 
+Háj 
+Hačava 
+Chorváty 
+Hosťovce 
+Turnianska Nová Ves 
+Žarnov 
+Peder 
+Janík 
+Drienovec 
+Štós 
+Medzev 
+Jasov 
+Poproč 
+Kojšov 
+Hrhov 
+Iliašovce 
+Vyšný Medzev 
+Margecany 
+Opiná 
+Bunetice 
+Kecerovce 
+Vtáčkovce 
+Ploské 
+Nová Polhora 
+Kráľovce 
+Vajkovce 
+Chrastné 
+Budimír 
+Beniakovce 
+Čižatice 
+Rozhanovce 
+Hrašovík 
+Košické Oľšany 
+Ďurďošík 
+Trsťany 
+Bačkovík 
+Čakanovce 
+Bidovce 
+Boliarov 
+Rankovce 
+Herľany 
+Kecerovský Lipovec 
+Mudrovce 
+Vyšná Kamenica 
+Nižná Kamenica 
+Svinica 
+Košice - Dargovských hrdinov 
+Košice - Košická Nová Ves 
+Košice - Staré Mesto 
+Košice - Juh 
+Sady nad Torysou 
+Košická Polianka 
+Košice - Krásna 
+Nižná Hutka 
+Vyšná Hutka 
+Vyšný Čaj 
+Bohdanovce 
+Blažice 
+Ruskov 
+Olšovany 
+Ďurkov 
+Rákoš 
+Slanec 
+Nový Salaš 
+Slanská Huta 
+Vyšná Myšľa 
+Nižná Myšľa 
+Ždaňa 
+Čaňa 
+Geča 
+Valaliky 
+Kokšov - Bakša 
+Gyňov 
+Trstené pri Hornáde 
+Skároš 
+Seňa 
+Belža 
+Kechnec 
+Milhosť 
+Perín - Chym 
+Veľká Ida 
+Košice - Západ 
+Bočiar 
+Sokoľany 
+Haniska 
+Košice - Šaca 
+Nižný Lánec 
+Buzica 
+Komárovce 
+Cestice 
+Čečejovce 
+Mokrance 
+Moldava nad Bodvou 
+Rešica 
+Paňovce 
+Debraď 
+Rudník 
+Nováčany 
+Hodkovce 
+Šemša 
+Malá Ida 
+Košice - Pereš 
+Bukovec 
+Baška 
+Košice - Luník IX 
+Košice - Myslava 
+Hýľov 
+Nižný Klátov 
+Vyšný Klátov 
+Zlatá Idka 
+Veľký Folkmar 
+Opátka 
+Košická Belá 
+Družstevná pri Hornáde 
+Kysak 
+Obišovce 
+Trebejov 
+Sokoľ 
+Veľká Lodina 
+Malá Lodina 
+Košice - Barca 
+Košice - Sever 
+Slančík 
+Košický Klečenov 
+Dargov 
+Bačkov 
+Višňov 
+Kravany 
+Stankovce 
+Parchovany 
+Dvorianky 
+Hriadky 
+Sečovce 
+Vojčice 
+Zbehňov 
+Malé Ozorovce 
+Trnávka 
+Veľké Ozorovce 
+Zemplínska Teplica 
+Slanské Nové Mesto 
+Kalša 
+Slivník 
+Kuzmice 
+Brezina 
+Kazimír 
+Byšta 
+Michaľany 
+Lastovce 
+Veľaty 
+Zemplínska Nová Ves 
+Nižný Žipov 
+Čeľovce 
+Egreš 
+Stanča 
+Trebišov 
+Plechotice 
+Nový Ruskov 
+Luhyňa 
+Hrčeľ 
+Kysta 
+Novosad 
+Kašov 
+Zemplínske Jastrabie 
+Cejkov 
+Brehov 
+Sirník 
+Hraň 
+Zemplínsky Branč 
+Kožuchov 
+Zemplínske Hradište 
+Malčice 
+Markovce 
+Oborín 
+Veľké Raškovce 
+Petrikovce 
+Beša 
+Ižkovce 
+Vojany 
+Čičarovce 
+Drahňov 
+Stretavka 
+Stretava 
+Malé Raškovce 
+Zemplínske Kopčany 
+Slavkovce 
+Budkovce 
+Dúbravka 
+Hatalov 
+Falkušovce 
+Kačanov 
+Bracovce 
+Ložín 
+Bánovce nad Ondavou 
+Žbince 
+Vrbnica 
+Laškovce 
+Trhovište 
+Šamudovce 
+Krásnovce 
+Pozdišovce 
+Sliepkovce 
+Lastomír 
+Michalovce 
+Horovce 
+Tušická Nová Ves 
+Tušice 
+Moravany 
+Rakovec nad Ondavou 
+Suché 
+Zalužice 
+Lúčky 
+Hažín 
+Čečehov 
+Jastrabie pri Michalovciach 
+Iňačovce 
+Zemplínska Široká 
+Senné 
+Palín 
+Soľnička 
+Poľany 
+Čerhov 
+Malá Tŕňa 
+Černochov 
+Bara 
+Borša 
+Slovenské Nové Mesto 
+Viničky 
+Ladmovce 
+Zemplín 
+Svinice 
+Svätuše 
+Svätá Mária 
+Somotor 
+Klin nad Bodrogom 
+Veľký Kamenec 
+Malý Kamenec 
+Strážne 
+Veľký Horeš 
+Malý Horeš 
+Streda nad Bodrogom 
+Boľ 
+Zatín 
+Rad 
+Strážske 
+Staré 
+Oreské 
+Nacina Ves 
+Voľa 
+Zbudza 
+Petrovce nad Laborcom 
+Trnava pri Laborci 
+Vinné 
+Lesné 
+Pusté Čemerné 
+Kráľovský Chlmec 
+Pribeník 
+Bačka 
+Leles 
+Dobrá 
+Biel 
+Čierna nad Tisou 
+Veľké Trakany 
+Malé Trakany 
+Čierna 
+Boťany 
+Veľké Kapušany 
+Kapušianske Kľačany 
+Ruská 
+Veľké Slemence 
+Ptrukša 
+Budince 
+Čierne Pole 
+Maťovské Vojkovce 
+Krišovská Liesková 
+Pavlovce nad Uhom 
+Bajany 
+Lekárovce 
+Pinkovce 
+Záhor 
+Bežovce 
+Vysoká nad Uhom 
+Tašuľa 
+Jenkovce 
+Nižné Nemecké 
+Vyšné Nemecké 
+Krčava 
+Sejkov 
+Kristy 
+Porostov 
+Ostrov 
+Sobrance 
+Svätuš 
+Blatná Polianka 
+Blatné Remety 
+Bunkovce 
+Blatné Revištia 
+Veľké Revištia 
+Nižná Rybnica 
+Tibava 
+Vojnatina 
+Koromľa 
+Petrovce 
+Orechová 
+Husák 
+Kolibabovce 
+Priekopa 
+Porúbka 
+Baškovce 
+Závadka 
+Hnojné 
+Fekišovce 
+Úbrež 
+Ruskovce 
+Choňkovce 
+Koňuš 
+Hlivištia 
+Podhoroď 
+Beňatina 
+Inovce 
+Ruský Hrabovec 
+Ruská Bystrá 
+Jasenov 
+Vyšná Rybnica 
+Vyšné Remety 
+Remetské Hámre 
+Poruba pod Vihorlatom 
+Jovsa 
+Kusín 
+Klokočov 
+Kaluža 
+Vojka 
+Veľká Tŕňa 
+Ardovo 
+Dlhá Ves 
+Kečovo 
+Gemerská Hôrka 
+Meliata 
+Bretka 
+Lipovník 
+Kolinovce 
+Arnutovce 
+Nižný Čaj 
+Košice - Džungľa 
+Košice - Sídlisko Ťahanovce 
+Košice - Ťahanovce 
+Košice - Kavečany 
+Košice - Šebastovce 
+Košice - Nad jazerom 
+Košice - Vyšné Opátske 
+Košice - Sídlisko KVP 
+Košice - Lorinčík 
+Košice - Poľov 
+Horňa 
