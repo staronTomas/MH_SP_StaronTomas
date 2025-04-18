@@ -5,7 +5,7 @@ public class Individual
     private static Random random = new Random();
     
     public List<int> Chromosome { get; private set; }
-    public int Fitness { get; private set; }
+    public double Fitness { get; private set; }
     private int[,] DistanceMatrix { get; set; }
     
     // Create a random individual

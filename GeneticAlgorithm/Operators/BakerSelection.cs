@@ -1,68 +1,84 @@
-namespace MH_SP_StaronTomas.GeneticAlgorithm.Operators;
-
-public class BakerSelection
+﻿namespace MH_SP_StaronTomas.GeneticAlgorithm.Operators
 {
-    private static Random random = new Random();
-
     /// <summary>
-    /// Baker's Stochastic Universal Selection
-    /// For TSP, we need to invert fitness since we want to minimize distance
+    /// Baker's Stochastic Universal Selection (SUS)
+    /// 
+    /// Pre TSP (kde cieľom je minimalizovať vzdialenosť), nižšia fitness hodnota je lepšia.
+    /// SUS však očakáva, že vyššia hodnota fitness znamená, že daný jedinec je lepší.
+    /// 
+    /// Preto som použil spôsob inverzie fitnessu:
+    /// invertedFitness = maxFitness - fitness + 1
+    /// 
+    /// Platí:
+    /// - Zvyšuje selektivitu výberu (lepší jedinci majú oveľa väčšiu šancu na výber)
+    /// - Zachovanie poradia jedincov (lepší jedinec má vyšší invertedFitness)
+    /// - Zabezpečuje dostatočný rozptyl pravdepodobností
+    /// 
+    /// Pri nepoužití tohto spôsobu som dostával omnoho horšie výsledky.
     /// </summary>
-    public static List<Individual> Select(Population population, int selectionSize)
+    public class BakerSelection
     {
-        var individuals = population.Individuals;
-        var selected = new List<Individual>();
-        
-        double totalFitness = 0;
-        var invertedFitness = new double[individuals.Count];
-        double maxFitness = individuals.Max(ind => ind.Fitness);
-        
-        for (int i = 0; i < individuals.Count; i++)
+        private static Random random = new Random();
+
+        public static List<Individual> Select(Population population, int selectionSize)
         {
-            // Invert fitness: higher fitness for shorter distances
-            invertedFitness[i] = maxFitness - individuals[i].Fitness + 1;
-            totalFitness += invertedFitness[i];
-        }
-        
-        // Calculate selection probabilities
-        var probabilities = new double[individuals.Count];
-        for (int i = 0; i < individuals.Count; i++)
-        {
-            probabilities[i] = invertedFitness[i] / totalFitness;
-        }
-        
-        // Calculate cumulative probabilities
-        var cumulativeProbabilities = new double[individuals.Count];
-        cumulativeProbabilities[0] = probabilities[0];
-        for (int i = 1; i < individuals.Count; i++)
-        {
-            cumulativeProbabilities[i] = cumulativeProbabilities[i - 1] + probabilities[i];
-        }
-        
-        // Baker's SUS: generate equally spaced pointers
-        double pointer = random.NextDouble() / selectionSize;
-        double step = 1.0 / selectionSize;
-        
-        for (int i = 0; i < selectionSize; i++)
-        {
-            // Find the individual that corresponds to the pointer
-            for (int j = 0; j < individuals.Count; j++)
+            var individuals = population.Individuals;
+            var selected = new List<Individual>();
+
+            // Získať najväčšiu (najhoršiu) fitness hodnotu
+            double maxFitness = individuals.Max(ind => ind.Fitness);
+
+            // Výpočet invertovaných fitness hodnôt a ich súčet
+            var invertedFitness = new double[individuals.Count];
+            double totalInvertedFitness = 0;
+
+            for (int i = 0; i < individuals.Count; i++)
             {
-                if (pointer <= cumulativeProbabilities[j])
+                invertedFitness[i] = maxFitness - individuals[i].Fitness + 1; // + 1 zaručuje, že aj najhorší jedinec má nenulový fitness(a teda má aspoň malú šancu na výber).
+                totalInvertedFitness += invertedFitness[i];
+            }
+
+            // Výpočet pravdepodobnosti výberov jednotlivých jedincov
+            var probabilities = new double[individuals.Count];
+            for (int i = 0; i < individuals.Count; i++)
+            {
+                probabilities[i] = invertedFitness[i] / totalInvertedFitness;
+            }
+
+            // Vytvorenie kumulatívnych pravdepodobností
+            var cumulativeProbabilities = new double[individuals.Count];
+            cumulativeProbabilities[0] = probabilities[0];
+            for (int i = 1; i < individuals.Count; i++)
+            {
+                cumulativeProbabilities[i] = cumulativeProbabilities[i - 1] + probabilities[i];
+            }
+
+            // Výber jedincov
+            double randPointer = random.NextDouble() / selectionSize;
+            double step = 1.0 / selectionSize; // vzdialenosť medzi jednotlivými pointermi
+
+            // Pre každý pointer vyberiem jedinca a naplním postupne výsledný zoznam
+            for (int i = 0; i < selectionSize; i++)
+            {
+                // Nájdenie jedinca, ktorý zodpovedá aktuálnemu pointeru..
+                for (int j = 0; j < individuals.Count; j++)
                 {
-                    selected.Add(individuals[j].Clone());
-                    break;
+                    if (randPointer <= cumulativeProbabilities[j])
+                    {
+                        selected.Add(individuals[j].Clone());
+                        break;
+                    }
+                }
+
+                // Posun pointeru
+                randPointer += step;
+                if (randPointer >= 1.0)
+                {
+                    randPointer -= 1.0;
                 }
             }
-            
-            // Move the pointer
-            pointer += step;
-            if (pointer >= 1.0)
-            {
-                pointer -= 1.0;
-            }
+
+            return selected;
         }
-        
-        return selected;
     }
 }
