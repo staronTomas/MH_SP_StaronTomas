@@ -5,24 +5,36 @@ public class Individual
     private static Random random = new Random();
     
     public List<int> Chromosome { get; private set; }
-    public double Fitness { get; private set; }
+    public int Fitness { get; private set; }
     private int[,] DistanceMatrix { get; set; }
-    
-    // Create a random individual
+
+    /// <summary>
+    /// Constructor for creating a random individual.
+    /// </summary>
     public Individual(int chromosomeLength, int[,] distanceMatrix)
     {
         DistanceMatrix = distanceMatrix;
-        Chromosome = Enumerable.Range(0, chromosomeLength).ToList();
-        
-        // Fisher-Yates shuffle
-        for (int i = Chromosome.Count - 1; i > 0; i--)
+        Chromosome = new List<int>();
+
+        List<int> listOfNodes = new List<int>();
+
+        // Create random Chromosome
+        for (int i = 1; i < 460; i++)
         {
-            int j = random.Next(0, i + 1);
-            int temp = Chromosome[i];
-            Chromosome[i] = Chromosome[j];
-            Chromosome[j] = temp;
+            listOfNodes.Add(i);
         }
-        
+
+        while(listOfNodes.Count > 0)
+        {
+            int randomIndex = random.Next(0, listOfNodes.Count);
+            Chromosome.Add(listOfNodes[randomIndex]);
+            listOfNodes.RemoveAt(randomIndex);
+        }
+
+        // Add city 0 at the beginning
+        Chromosome.Insert(0, 0);
+        Chromosome.Add(0); // Add city 0 at the end to complete the route
+
         CalculateFitness();
     }
     
@@ -30,6 +42,11 @@ public class Individual
     public Individual(List<int> chromosome, int[,] distanceMatrix)
     {
         DistanceMatrix = distanceMatrix;
+        // Ensure the chromosome starts with city 0
+        if (chromosome[0] != 0)
+        {
+            throw new ArgumentException("Chromosome must start with city 0");
+        }
         Chromosome = new List<int>(chromosome);
         CalculateFitness();
     }
@@ -45,13 +62,11 @@ public class Individual
     {
         int totalDistance = 0;
         
+        // Calculate distance through all cities
         for (int i = 0; i < Chromosome.Count - 1; i++)
         {
             totalDistance += DistanceMatrix[Chromosome[i], Chromosome[i + 1]];
         }
-        
-        // Add the distance from the last city back to the first
-        totalDistance += DistanceMatrix[Chromosome[Chromosome.Count - 1], Chromosome[0]];
         
         Fitness = totalDistance;
     }
@@ -59,6 +74,6 @@ public class Individual
     // Override ToString to display the chromosome and fitness
     public override string ToString()
     {
-        return $"Route: {string.Join(" -> ", Chromosome)} | Distance: {Fitness}";
+        return $"Route: {string.Join(" -> ", Chromosome)} -> 0 | Distance: {Fitness}";
     }
 }

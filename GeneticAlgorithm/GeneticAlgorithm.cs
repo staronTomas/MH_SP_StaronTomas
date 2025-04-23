@@ -21,16 +21,13 @@ public class GeneticAlgorithm
         Cities = cities;
         DistanceMatrix = distanceMatrix;
         Random = new Random();
-        
-        // Initialize results file
-        ResultsWriter = new StreamWriter(Parameters.OutputFilePath);
-        ResultsWriter.WriteLine("Generation,Best Fitness,Average Fitness,Worst Fitness");
     }
     
-    public void Run()
+    public void Solve()
     {
         // Initialize population
-        CurrentPopulation = new Population(Parameters.PopulationSize, Cities.Count, DistanceMatrix);
+        // Chromosome length is cities count + 1 for the return to the starting city
+        CurrentPopulation = new Population(Parameters.PopulationSize, Cities.Count + 1, DistanceMatrix);
         
         // Find the initial best individual
         BestIndividual = CurrentPopulation.Best.Clone();
@@ -53,35 +50,42 @@ public class GeneticAlgorithm
                 // Selection
                 List<Individual> parents = BakerSelection.Select(CurrentPopulation, 2);
                 
-                Individual child;
+                List<Individual> children;
                 
                 // Crossover
                 if (Random.NextDouble() < Parameters.CrossoverRate)
                 {
-                    child = UniformCrossover.Crossover(parents[0], parents[1], DistanceMatrix);
+                    // TOTO BUDE TREBA cele fixnut.. pretoze tu budu az 2 potomkovia, nie iba 1...
+                    children = UniformCrossover.Crossover(parents[0], parents[1], DistanceMatrix);
                 }
                 else
                 {
                     // No crossover, just clone a parent
-                    child = parents[0].Clone();
+                    children = new List<Individual> { parents[0].Clone() };
                 }
-                
+
                 // Mutation
-                if (Random.NextDouble() < Parameters.MutationRate)
+                foreach (var child in children)
                 {
-                    // Choose mutation type based on probabilities
-                    double mutationType = Random.NextDouble();
-                    if (mutationType < Parameters.SwapMutationProbability)
+                    if (Random.NextDouble() < Parameters.MutationRate)
                     {
-                        MutationTSP.SwapMutation(child);
-                    }
-                    else
-                    {
-                        MutationTSP.InversionMutation(child);
+                        // Choose mutation type based on probabilities
+                        double mutationType = Random.NextDouble();
+                        if (mutationType < Parameters.SwapMutationProbability)
+                        {
+                            MutationTSP.SwapMutation(child);
+                        }
+                        else
+                        {
+                            MutationTSP.InversionMutation(child);
+                        }
                     }
                 }
-                
-                newPopulation.Add(child);
+
+                foreach (var child in children)
+                {
+                    newPopulation.Add(child);
+                }
             }
             
             // Update current population
@@ -100,7 +104,7 @@ public class GeneticAlgorithm
             }
             
             // Log statistics
-            if (Parameters.ShowGenerationStats && generation % Parameters.OutputFrequency == 0)
+            if (generation % Parameters.OutputFrequency == 0)
             {
                 WriteGenerationStats(generation);
             }
@@ -132,9 +136,6 @@ public class GeneticAlgorithm
         var stats = CurrentPopulation.GetStatistics();
         
         Console.WriteLine($"Generation {generation}: Best = {stats.Best}, Avg = {stats.Average:F2}, Worst = {stats.Worst}");
-        
-        // Write to file
-        ResultsWriter.WriteLine($"{generation},{stats.Best},{stats.Average},{stats.Worst}");
     }
     
     private void WriteResults()
@@ -144,23 +145,30 @@ public class GeneticAlgorithm
         
         // Print the route with city names
         Console.WriteLine("\nRoute:");
-        for (int i = 0; i < BestIndividual.Chromosome.Count; i++)
+        Console.WriteLine($"Start: {Cities[0].Name} (ID: {Cities[0].Id})");
+        
+        for (int i = 1; i < BestIndividual.Chromosome.Count; i++)
         {
             int cityIndex = BestIndividual.Chromosome[i];
-            Console.WriteLine($"{i+1}. {Cities[cityIndex].Name} (ID: {Cities[cityIndex].Id})");
+            Console.WriteLine($"{i}. {Cities[cityIndex].Name} (ID: {Cities[cityIndex].Id})");
         }
+        
+        Console.WriteLine($"Return to: {Cities[0].Name} (ID: {Cities[0].Id})");
         
         // Write to separate results file
         using (StreamWriter routeWriter = new StreamWriter("best_route.txt"))
         {
             routeWriter.WriteLine($"Best Distance: {BestIndividual.Fitness}");
             routeWriter.WriteLine("\nRoute:");
+            routeWriter.WriteLine($"Start: {Cities[0].Name} (ID: {Cities[0].Id})");
             
-            for (int i = 0; i < BestIndividual.Chromosome.Count; i++)
+            for (int i = 1; i < BestIndividual.Chromosome.Count; i++)
             {
                 int cityIndex = BestIndividual.Chromosome[i];
-                routeWriter.WriteLine($"{i+1}. {Cities[cityIndex].Name} (ID: {Cities[cityIndex].Id})");
+                routeWriter.WriteLine($"{i}. {Cities[cityIndex].Name} (ID: {Cities[cityIndex].Id})");
             }
+            
+            routeWriter.WriteLine($"Return to: {Cities[0].Name} (ID: {Cities[0].Id})");
         }
     }
 }

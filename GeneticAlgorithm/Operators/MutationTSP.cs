@@ -14,20 +14,21 @@ public class MutationTSP
     public static void SwapMutation(Individual individual)
     {
         int chromosomeLength = individual.Chromosome.Count;
-        int pos1 = random.Next(chromosomeLength);
-        int pos2 = random.Next(chromosomeLength);
+        // Generate positions (skip start/end city)
+        int pos1 = random.Next(1, chromosomeLength);
+        int pos2 = random.Next(1, chromosomeLength);
 
         // In a case where pos1 and pos2 are the same, we need to select a different position
         while (pos1 == pos2)
         {
-            pos2 = random.Next(chromosomeLength);
+            pos2 = random.Next(1, chromosomeLength);
         }
-        
+
         // Swap the gens
         int temp = individual.Chromosome[pos1];
         individual.Chromosome[pos1] = individual.Chromosome[pos2];
         individual.Chromosome[pos2] = temp;
-        
+
         // Recalculate fitness
         individual.CalculateFitness();
     }
@@ -38,35 +39,34 @@ public class MutationTSP
     /// <param name="individual">Individual whose chromosome whill be mutated.</param>
     public static void InversionMutation(Individual individual)
     {
-        var chromosome = individual.Chromosome;
-
-        int gen1 = random.Next(chromosome.Count);
-        int gen2 = random.Next(chromosome.Count);
+        int chromosomeLength = individual.Chromosome.Count;
+        int pos1 = random.Next(1, chromosomeLength);
+        int pos2 = random.Next(1, chromosomeLength);
 
         // In a case where pos1 and pos2 are the same, we need to select a different position
-        while (gen1 == gen2)
+        while (pos1 == pos2)
         {
-            gen2 = random.Next(chromosome.Count);
+            pos2 = random.Next(1, chromosomeLength);
         }
-        
+
         // Ensure pos1 < pos2
-        if (gen1 > gen2)
+        if (pos1 > pos2)
         {
-            int temp = gen1;
-            gen1 = gen2;
-            gen2 = temp;
+            int temp = pos1;
+            pos1 = pos2;
+            pos2 = temp;
         }
-        
+
         // Reverse the subsequence
-        while (gen1 < gen2)
+        while (pos1 < pos2)
         {
-            int temp = chromosome[gen1];
-            chromosome[gen1] = chromosome[gen2];
-            chromosome[gen2] = temp;
-            gen1++;
-            gen2--;
+            int temp = individual.Chromosome[pos1];
+            individual.Chromosome[pos1] = individual.Chromosome[pos2];
+            individual.Chromosome[pos2] = temp;
+            pos1++;
+            pos2--;
         }
-        
+
         // Recalculate fitness
         individual.CalculateFitness();
     }

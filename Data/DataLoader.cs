@@ -11,7 +11,7 @@ public class DataLoader
         
         int cityCount = int.Parse(names[0]);
         
-        for (int i = 1; i < cityCount; i++)
+        for (int i = 1; i <= cityCount; i++)
         {
             cities.Add(new City(i, names[i].Trim(), codes[i].Trim()));
         }
