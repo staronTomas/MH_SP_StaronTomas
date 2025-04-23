@@ -38,7 +38,9 @@ public class Individual
         CalculateFitness();
     }
     
-    // Create an individual with a predefined chromosome
+    /// <summary>
+    /// Create an individual with a predefined chromosome
+    /// </summary>
     public Individual(List<int> chromosome, int[,] distanceMatrix)
     {
         DistanceMatrix = distanceMatrix;
@@ -50,7 +52,22 @@ public class Individual
         Chromosome = new List<int>(chromosome);
         CalculateFitness();
     }
-    
+
+    /// <summary>
+    /// Add this constructor to your Individual class
+    /// </summary>
+    public Individual(int[] chromosomeArray, int[,] distanceMatrix)
+    {
+        DistanceMatrix = distanceMatrix;
+        if (chromosomeArray[0] != 0)
+        {
+            throw new ArgumentException("Chromosome must start with city 0");
+        }
+        Chromosome = new List<int>(chromosomeArray);
+        CalculateFitness();
+    }
+
+
     // Clone an individual
     public Individual Clone()
     {

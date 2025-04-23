@@ -46,12 +46,8 @@ public class Population
     }
     
     // Get statistics about the population
-    public (double Best, double Average, double Worst) GetStatistics()
+    public double GetStatistics()
     {
-        var best = Individuals.Min(i => i.Fitness);
-        var average = Individuals.Average(i => i.Fitness);
-        var worst = Individuals.Max(i => i.Fitness);
-        
-        return (best, average, worst);
+        return Individuals.Min(i => i.Fitness);
     }
 }

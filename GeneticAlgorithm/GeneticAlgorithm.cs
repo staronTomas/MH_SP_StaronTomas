@@ -133,9 +133,9 @@ public class GeneticAlgorithm
     
     private void WriteGenerationStats(int generation)
     {
-        var stats = CurrentPopulation.GetStatistics();
+        var best = CurrentPopulation.GetStatistics();
         
-        Console.WriteLine($"Generation {generation}: Best = {stats.Best}, Avg = {stats.Average:F2}, Worst = {stats.Worst}");
+        Console.WriteLine($"Generation {generation}: Best = {best}");
     }
     
     private void WriteResults()
