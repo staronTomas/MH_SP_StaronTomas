@@ -38,10 +38,9 @@ public class GeneticAlgorithm
         {
             List<Individual> newPopulation = new List<Individual>();
             
-            // Ponech·m si X najlepöÌch jedincov v popul·ciÌ
             newPopulation.AddRange(CurrentPopulation.GetElite(Parameters.EliteSize));
-            
-            // Pomocou selekciÌ, krÌûenia a mut·ciÌ vyber·m dalöÌch potomkov z popul·cie
+
+            // Pomocou selekci√≠, kr√≠≈æenia a mut√°ci√≠ vyber√°m dal≈°√≠ch potomkov z popul√°cie
             while (newPopulation.Count < Parameters.PopulationSize)
             {
                 // Selekcia Baker's SUS
@@ -131,10 +130,55 @@ public class GeneticAlgorithm
         
         for (int i = 1; i < BestIndividual.Chromosome.Count; i++)
         {
-            int cityIndex = BestIndividual.Chromosome[i];
-            Console.WriteLine($"{i}. {Cities[cityIndex].Name} (ID: {Cities[cityIndex].Id})");
+            int currentCityIndex = BestIndividual.Chromosome[i];
+            int previousCityIndex = BestIndividual.Chromosome[i - 1];
+            int distance = DistanceMatrix[previousCityIndex, currentCityIndex];
+            
+            Console.WriteLine($"{i}. {Cities[currentCityIndex].Name} (ID: {Cities[currentCityIndex].Id}) - Distance from previous: {distance}");
         }
         
         Console.WriteLine($"Return to: {Cities[0].Name} (ID: {Cities[0].Id})");
+        
+        using (StreamWriter routeWriter = new StreamWriter("best_route.txt"))
+        {
+            routeWriter.WriteLine($"Best Distance: {BestIndividual.Fitness}");
+            routeWriter.WriteLine("\nRoute:");
+            routeWriter.WriteLine($"Start: {Cities[0].Name} (ID: {Cities[0].Id})");
+            
+            for (int i = 1; i < BestIndividual.Chromosome.Count; i++)
+            {
+                int currentCityIndex = BestIndividual.Chromosome[i];
+                int previousCityIndex = BestIndividual.Chromosome[i - 1];
+                int distance = DistanceMatrix[previousCityIndex, currentCityIndex];
+                
+                routeWriter.WriteLine($"{i}. {Cities[currentCityIndex].Name} (ID: {Cities[currentCityIndex].Id}) - Distance from previous: {distance}");
+            }
+            
+            routeWriter.WriteLine($"Return to: {Cities[0].Name} (ID: {Cities[0].Id})");
+        }
+    }
+
+    /// <summary>
+    /// Vr√°ti fitness hodnotu najlep≈°ieho n√°jden√©ho rie≈°enia
+    /// </summary>
+    public int GetBestFitness()
+    {
+        return BestIndividual.Fitness;
+    }
+
+    /// <summary>
+    /// Vr√°ti najlep≈°ie n√°jden√© rie≈°enie (trasu)
+    /// </summary>
+    public List<int> GetBestSolution()
+    {
+        return new List<int>(BestIndividual.Chromosome);
+    }
+
+    /// <summary>
+    /// Vr√°ti poƒçet gener√°ci√≠, ktor√© algoritmus vykonal
+    /// </summary>
+    public int GetGenerationsCount()
+    {
+        return Parameters.MaxGenerations - GenerationsWithoutImprovement;
     }
 }
