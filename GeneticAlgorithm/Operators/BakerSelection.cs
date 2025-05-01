@@ -34,7 +34,8 @@
 
             for (int i = 0; i < individuals.Count; i++)
             {
-                invertedFitness[i] = maxFitness - individuals[i].Fitness + 1; // + 1 zaručuje, že aj najhorší jedinec má nenulový fitness(a teda má aspoň malú šancu na výber).
+                // + 1 zaručuje, že aj najhorší jedinec má nenulový fitness(a teda má aspoň malú šancu na výber).
+                invertedFitness[i] = maxFitness - individuals[i].Fitness + 1; 
                 totalInvertedFitness += invertedFitness[i];
             }
 

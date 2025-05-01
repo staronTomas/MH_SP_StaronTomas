@@ -6,7 +6,6 @@ public class Population
     public int Size => Individuals.Count;
     public Individual Best => Individuals.OrderBy(ind => ind.Fitness).First();
     
-    // Create a new population with random individuals
     public Population(int size, int chromosomeLength, int[,] distanceMatrix)
     {
         Individuals = new List<Individual>(size);
@@ -17,13 +16,11 @@ public class Population
         }
     }
     
-    // Create a population with predefined individuals
     public Population(List<Individual> individuals)
     {
         Individuals = new List<Individual>(individuals);
     }
     
-    // Get the best n individuals (elite)
     public List<Individual> GetElite(int eliteSize)
     {
         return Individuals
@@ -33,19 +30,16 @@ public class Population
             .ToList();
     }
     
-    // Sort population by fitness (ascending for TSP, as we want to minimize distance)
     public void SortByFitness()
     {
         Individuals = Individuals.OrderBy(ind => ind.Fitness).ToList();
     }
     
-    // Add an individual to the population
     public void AddIndividual(Individual individual)
     {
         Individuals.Add(individual);
     }
     
-    // Get statistics about the population
     public double GetStatistics()
     {
         return Individuals.Min(i => i.Fitness);

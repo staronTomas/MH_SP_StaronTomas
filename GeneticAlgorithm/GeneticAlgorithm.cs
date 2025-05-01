@@ -29,47 +29,42 @@ public class GeneticAlgorithm
         // Chromosome length is cities count + 1 for the return to the starting city
         CurrentPopulation = new Population(Parameters.PopulationSize, Cities.Count + 1, DistanceMatrix);
         
-        // Find the initial best individual
         BestIndividual = CurrentPopulation.Best.Clone();
         
-        // Log initial statistics
         WriteGenerationStats(0);
         
         // Evolution loop
         for (int generation = 1; generation <= Parameters.MaxGenerations; generation++)
         {
-            // Create new population
             List<Individual> newPopulation = new List<Individual>();
             
-            // Add elite individuals
+            // Ponechám si X najlepších jedincov v populácií
             newPopulation.AddRange(CurrentPopulation.GetElite(Parameters.EliteSize));
             
-            // Selection, crossover and mutation
+            // Pomocou selekcií, kríženia a mutácií vyberám dalších potomkov z populácie
             while (newPopulation.Count < Parameters.PopulationSize)
             {
-                // Selection
+                // Selekcia Baker's SUS
                 List<Individual> parents = BakerSelection.Select(CurrentPopulation, 2);
-                
+
+                // Krizenie
                 List<Individual> children;
-                
-                // Crossover
                 if (Random.NextDouble() < Parameters.CrossoverRate)
                 {
-                    // TOTO BUDE TREBA cele fixnut.. pretoze tu budu az 2 potomkovia, nie iba 1...
                     children = UniformCrossover.Crossover(parents[0], parents[1], DistanceMatrix);
                 }
                 else
                 {
-                    // No crossover, just clone a parent
-                    children = new List<Individual> { parents[0].Clone() };
+                    // Nerobim krizenie, iba nakopirujem rodicov
+                    children = new List<Individual> { parents[0].Clone(), parents[1].Clone() };
                 }
 
-                // Mutation
+                // Mutacie
                 foreach (var child in children)
                 {
                     if (Random.NextDouble() < Parameters.MutationRate)
                     {
-                        // Choose mutation type based on probabilities
+                        // Vyber typu mutacie random
                         double mutationType = Random.NextDouble();
                         if (mutationType < Parameters.SwapMutationProbability)
                         {
@@ -88,10 +83,9 @@ public class GeneticAlgorithm
                 }
             }
             
-            // Update current population
             CurrentPopulation = new Population(newPopulation);
             
-            // Check if we have a new best individual
+            // Kontrola ci vznikol novy najlepsi jedinec
             Individual currentBest = CurrentPopulation.Best;
             if (currentBest.Fitness < BestIndividual.Fitness)
             {
@@ -103,19 +97,11 @@ public class GeneticAlgorithm
                 GenerationsWithoutImprovement++;
             }
             
-            // Log statistics
-            if (generation % Parameters.OutputFrequency == 0)
+            if (generation % 50 == 0)
             {
                 WriteGenerationStats(generation);
             }
-            
-            // Termination criteria check
-            if (Parameters.TargetFitness > 0 && BestIndividual.Fitness <= Parameters.TargetFitness)
-            {
-                Console.WriteLine($"Target fitness reached in generation {generation}!");
-                break;
-            }
-            
+
             if (GenerationsWithoutImprovement >= Parameters.MaxGenerationsWithoutImprovement)
             {
                 Console.WriteLine($"No improvement for {Parameters.MaxGenerationsWithoutImprovement} generations. Stopping.");
@@ -123,12 +109,8 @@ public class GeneticAlgorithm
             }
         }
         
-        // Final results
         Console.WriteLine("\nGenetic Algorithm Finished");
         WriteResults();
-        
-        // Close results file
-        ResultsWriter.Close();
     }
     
     private void WriteGenerationStats(int generation)
@@ -154,21 +136,5 @@ public class GeneticAlgorithm
         }
         
         Console.WriteLine($"Return to: {Cities[0].Name} (ID: {Cities[0].Id})");
-        
-        // Write to separate results file
-        using (StreamWriter routeWriter = new StreamWriter("best_route.txt"))
-        {
-            routeWriter.WriteLine($"Best Distance: {BestIndividual.Fitness}");
-            routeWriter.WriteLine("\nRoute:");
-            routeWriter.WriteLine($"Start: {Cities[0].Name} (ID: {Cities[0].Id})");
-            
-            for (int i = 1; i < BestIndividual.Chromosome.Count; i++)
-            {
-                int cityIndex = BestIndividual.Chromosome[i];
-                routeWriter.WriteLine($"{i}. {Cities[cityIndex].Name} (ID: {Cities[cityIndex].Id})");
-            }
-            
-            routeWriter.WriteLine($"Return to: {Cities[0].Name} (ID: {Cities[0].Id})");
-        }
     }
 }

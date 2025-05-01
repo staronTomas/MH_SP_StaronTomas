@@ -8,9 +8,6 @@ public class Individual
     public int Fitness { get; private set; }
     private int[,] DistanceMatrix { get; set; }
 
-    /// <summary>
-    /// Constructor for creating a random individual.
-    /// </summary>
     public Individual(int chromosomeLength, int[,] distanceMatrix)
     {
         DistanceMatrix = distanceMatrix;
@@ -18,7 +15,6 @@ public class Individual
 
         List<int> listOfNodes = new List<int>();
 
-        // Create random Chromosome
         for (int i = 1; i < 460; i++)
         {
             listOfNodes.Add(i);
@@ -38,9 +34,6 @@ public class Individual
         CalculateFitness();
     }
     
-    /// <summary>
-    /// Create an individual with a predefined chromosome
-    /// </summary>
     public Individual(List<int> chromosome, int[,] distanceMatrix)
     {
         DistanceMatrix = distanceMatrix;
@@ -53,9 +46,6 @@ public class Individual
         CalculateFitness();
     }
 
-    /// <summary>
-    /// Add this constructor to your Individual class
-    /// </summary>
     public Individual(int[] chromosomeArray, int[,] distanceMatrix)
     {
         DistanceMatrix = distanceMatrix;
@@ -67,19 +57,15 @@ public class Individual
         CalculateFitness();
     }
 
-
-    // Clone an individual
     public Individual Clone()
     {
         return new Individual(new List<int>(Chromosome), DistanceMatrix);
     }
     
-    // Calculate the total distance of the route (fitness)
     public void CalculateFitness()
     {
         int totalDistance = 0;
         
-        // Calculate distance through all cities
         for (int i = 0; i < Chromosome.Count - 1; i++)
         {
             totalDistance += DistanceMatrix[Chromosome[i], Chromosome[i + 1]];
@@ -88,7 +74,6 @@ public class Individual
         Fitness = totalDistance;
     }
     
-    // Override ToString to display the chromosome and fitness
     public override string ToString()
     {
         return $"Route: {string.Join(" -> ", Chromosome)} -> 0 | Distance: {Fitness}";

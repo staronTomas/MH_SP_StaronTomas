@@ -24,7 +24,7 @@ public class DataLoader
         string[] lines = File.ReadAllLines(distanceFile);
         int[,] distances = new int[cityCount, cityCount];
         
-        int lineIndex = 2; // Skip the first and second line (city count) 460 x 460
+        int lineIndex = 2; // Preskocime prvy a posledny riadok, pretoze miest je 460 x 460
         
         for (int i = 0; i < cityCount; i++)
         {
